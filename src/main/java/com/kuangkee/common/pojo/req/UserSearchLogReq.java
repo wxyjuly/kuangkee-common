@@ -35,6 +35,9 @@ public class UserSearchLogReq {
     private Date updateTime;
     
     //--extends req param
+    
+	private String tokenId ; //用户tokenId
+    
     private String searchStartDate ; //搜索开始时间
     
     private String searchEndDate ; //搜索结束时间
@@ -183,6 +186,14 @@ public class UserSearchLogReq {
 				+ ", longitude=" + longitude + ", latitude=" + latitude + ", ip=" + ip + ", createTime=" + createTime
 				+ ", updateTime=" + updateTime + ", searchStartDate=" + searchStartDate + ", searchEndDate="
 				+ searchEndDate + "]";
+	}
+
+	public String getTokenId() {
+		return tokenId;
+	}
+
+	public void setTokenId(String tokenId) {
+		this.tokenId = tokenId;
 	}
     
 }

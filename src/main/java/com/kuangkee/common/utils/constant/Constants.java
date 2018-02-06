@@ -15,11 +15,15 @@ public class Constants {
 		
 		public static final Integer ERROR_CODE = 999999 ; //失败
 		
+		public static final Integer PARAM_ERROR_CODE = 111111 ; //
+		
 		public static final String DB_INSERT_ERROR_MSG = "数据库插入失败!" ; 
 		
 		public static final String DB_UPDATE_ERROR_MSG = "数据库更新失败!" ;
 		
 		public static final String DB_QUERY_ERROR_MSG = "数据库查询失败!" ;
+		
+		public static final String DB_QUERY_EMPTY_MSG = "数据库查询无数据!" ;
 
 		public static final String INPUT_PARAM_ERROR = "入参有误!" ;
 	}
