@@ -1,8 +1,8 @@
-package com.kuangkee.common.pojo.req ;
+package com.kuangkee.common.pojo.resp ;
 
 import java.util.Date;
 
-public class UserSearchLogReq {
+public class ProfessionResp {
 	
     private Integer logId;
 
