@@ -53,4 +53,11 @@ public class SearchResult<T> {
 	public void setCurPage(long curPage) {
 		this.curPage = curPage;
 	}
+	
+	@Override
+	public String toString() {
+		return "SearchResult [result=" + result + ", recordCount=" + recordCount + ", pageCount=" + pageCount
+				+ ", curPage=" + curPage + ", searchStatus=" + searchStatus + "]";
+	}
+	
 }
