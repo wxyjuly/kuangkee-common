@@ -6,7 +6,7 @@ public class UserSearchLogReq {
 	
     private Integer logId;
 
-    private Integer userId;
+    private Long userId;
 
     private Integer brandId;
 
@@ -60,11 +60,11 @@ public class UserSearchLogReq {
 		this.logId = logId;
 	}
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

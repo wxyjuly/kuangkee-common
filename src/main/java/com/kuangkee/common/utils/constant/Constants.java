@@ -26,6 +26,12 @@ public class Constants {
 		public static final String DB_QUERY_EMPTY_MSG = "数据库查询无数据!" ;
 
 		public static final String INPUT_PARAM_ERROR = "入参有误!" ;
+		
+		public static final String USER_LOGGING_ERROR = "用户登陆信息有误!" ;
 	}
 
+	public static final class SysConstant {
+		public static final String ACOUNT = "account" ; //session中的user值
+		
+	}
 }
