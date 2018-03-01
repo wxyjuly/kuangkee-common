@@ -1,10 +1,11 @@
 package com.kuangkee.common.pojo.req;
 
 import java.util.Date;
+import java.util.List;
 
 public class ArticleReq {
 	
-    private Integer articleId;
+    private Long articleId;
 
     private String brandId;
 
@@ -15,6 +16,8 @@ public class ArticleReq {
     private String title;
 
     private String subTitle;
+    
+    private String imgSearchSmall ;
 
     private String url;
 
@@ -38,12 +41,30 @@ public class ArticleReq {
     private String searchStartDate ; //搜索开始时间
     
     private String searchEndDate ; //搜索结束时间
+    
+    private List<Long> idLists ; //批量更新参数
 
-	public Integer getArticleId() {
+	public List<Long> getIdLists() {
+		return idLists;
+	}
+
+	public void setIdLists(List<Long> idLists) {
+		this.idLists = idLists;
+	}
+
+	public String getImgSearchSmall() {
+		return imgSearchSmall;
+	}
+
+	public void setImgSearchSmall(String imgSearchSmall) {
+		this.imgSearchSmall = imgSearchSmall;
+	}
+
+	public Long getArticleId() {
 		return articleId;
 	}
 
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
 	}
 

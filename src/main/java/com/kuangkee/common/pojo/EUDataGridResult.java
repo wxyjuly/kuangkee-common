@@ -2,8 +2,6 @@ package com.kuangkee.common.pojo;
 
 import java.util.List;
 
-import org.junit.Test;
-
 public class EUDataGridResult {
 
 	private long total;
@@ -21,7 +19,7 @@ public class EUDataGridResult {
 		this.rows = rows;
 	}
 	
-	@Test
+//	@Test
 	public void initBeanTest() {
 		Long total = new EUDataGridResult().getTotal() ;
 		System.out.println("total inital -> "+total) ;
