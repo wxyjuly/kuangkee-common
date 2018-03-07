@@ -20,9 +20,18 @@ public class SearchResult<T> {
 	private long pageCount;
 	//当前页
 	private long curPage;
+	//每页记录数
+	private long pageSize ;
+	
 	//搜索结果[0{无搜索结果},1{错误代码匹配成功},2{关键字匹配成功}]
 	private String searchStatus = SearchStatus.ERROR_CODE_MATCHED_SEARCH ;
 	
+	public long getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(long pageSize) {
+		this.pageSize = pageSize;
+	}
 	public String getSearchStatus() {
 		return searchStatus;
 	}
