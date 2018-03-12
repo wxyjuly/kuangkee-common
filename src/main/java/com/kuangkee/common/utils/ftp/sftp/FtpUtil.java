@@ -12,6 +12,9 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
+import org.slf4j.LoggerFactory;
+
+import com.jcraft.jsch.Logger;
 
 /**
  * ftp上传下载工具类
@@ -40,6 +43,7 @@ public class FtpUtil {
 			String filePath, String filename, InputStream input) {
 		boolean result = false;
 		FTPClient ftp = new FTPClient();
+		
 		try {
 			int reply;
 			ftp.connect(host, port);// 连接FTP服务器
@@ -69,6 +73,7 @@ public class FtpUtil {
 			}
 			//设置上传文件的类型为二进制类型
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
+			
 			//上传文件
 			if (!ftp.storeFile(filename, input)) {
 				return result;
@@ -142,9 +147,15 @@ public class FtpUtil {
 	}
 	
 	public static void main(String[] args) {
+		
+//		FTP_ADDRESS=120.78.176.153
+//		FTP_PORT=21
+//		FTP_USERNAME=kuangheeftp
+//		FTP_PASSWORD=kuanghee#2018/*-
+//		FTP_BASE_PATH=/usr/java_soft/installed/kuanghee_static/resources/images/detail
 		try {  
-	        FileInputStream in=new FileInputStream(new File("D:\\temp\\image\\gaigeming.jpg"));  
-	        boolean flag = uploadFile("192.168.25.133", 21, "ftpuser", "ftpuser", "/home/ftpuser/www/images","/2015/01/21", "gaigeming.jpg", in);  
+	        FileInputStream in=new FileInputStream(new File("E:\\eagle.jpg"));  
+	        boolean flag = uploadFile("120.78.176.153", 21, "kuangheeftp", "kuanghee#2018/*-", "/usr/java_soft/installed/kuanghee_static/resources/images/detail","", "eagle-1.jpg", in);  
 	        System.out.println(flag);  
 	    } catch (FileNotFoundException e) {  
 	        e.printStackTrace();  
