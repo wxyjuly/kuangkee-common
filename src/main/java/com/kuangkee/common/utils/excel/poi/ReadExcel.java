@@ -13,11 +13,7 @@ package com.kuangkee.common.utils.excel.poi;
  * Date:     2018年3月21日 下午4:30:17 <br/>
  * @author   Leon Xi
  * @version  v1.0
- * @see 	 
- */
-
-/**
- * 
+ * @see 	 http://www.cnblogs.com/hongten/p/java_poi_excel_xls_xlsx.html
  */
 
 import java.io.FileInputStream;
@@ -35,10 +31,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- * @author Hongten
- * @created 2014-5-20
- */
 public class ReadExcel {
     
     /**
