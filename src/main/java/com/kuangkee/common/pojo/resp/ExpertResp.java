@@ -25,7 +25,9 @@ public class ExpertResp {
 
     private Integer cousultTimes;
 
-    private String info;
+    private String info ;
+    
+    private String distance ;  //保存当前用户、与专家距离
     
     List<ExpertBrands> expertBrands ;
 
@@ -123,6 +125,14 @@ public class ExpertResp {
 
 	public void setExpertBrands(List<ExpertBrands> expertBrands) {
 		this.expertBrands = expertBrands;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
     
 }
