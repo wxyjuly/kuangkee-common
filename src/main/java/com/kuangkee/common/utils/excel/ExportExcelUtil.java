@@ -30,8 +30,6 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kuangkee.common.utils.check.MatchUtil;
-
 /**
  * Excel导出工具类
  * ClassName: ExportExcelUtil <br/>
