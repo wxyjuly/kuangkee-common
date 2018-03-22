@@ -1,15 +1,7 @@
-/**
- * Project Name:kuangkee-common
- * File Name:ReadExcel.java
- * Package Name:com.kuangkee.common.utils.excel.poi
- * Date:2018年3月21日下午4:30:17
- * Copyright (c) 2018, 【Leon Xi】 All Rights Reserved.
- *
-*/
 
 package com.kuangkee.common.utils.excel.poi;
 /**
- * ClassName:ReadExcel <br/>
+ * ClassName:ReadImportExcel <br/>
  * Date:     2018年3月21日 下午4:30:17 <br/>
  * @author   Leon Xi
  * @version  v1.0
@@ -31,9 +23,10 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.kuangkee.common.utils.excel.poi.vo.Student;
+import com.kuangkee.common.utils.check.MatchUtil;
+import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
 
-public class ReadExcel {
+public class ReadImportExcel {
     
     /**
      * read the Excel file
@@ -41,7 +34,7 @@ public class ReadExcel {
      * @return
      * @throws IOException
      */
-    public List<Student> readExcel(String path) throws IOException {
+    public List<BrandArticleImportBean> readExcel(String path) throws IOException {
         if (path == null || ExcelCommon.EMPTY.equals(path)) {
             return null;
         } else {
@@ -65,12 +58,12 @@ public class ReadExcel {
      * @return
      * @throws IOException
      */
-    public List<Student> readXlsx(String path) throws IOException {
+    public List<BrandArticleImportBean> readXlsx(String path) throws IOException {
         System.out.println(ExcelCommon.PROCESSING + path);
         InputStream is = new FileInputStream(path);
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
-        Student student = null;
-        List<Student> list = new ArrayList<Student>();
+        BrandArticleImportBean bean = null;
+        List<BrandArticleImportBean> list = new ArrayList<BrandArticleImportBean>();
         // Read the Sheet
         for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
             XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
@@ -81,16 +74,14 @@ public class ReadExcel {
             for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
                 XSSFRow xssfRow = xssfSheet.getRow(rowNum);
                 if (xssfRow != null) {
-                    student = new Student();
-                    XSSFCell no = xssfRow.getCell(0);
-                    XSSFCell name = xssfRow.getCell(1);
-                    XSSFCell age = xssfRow.getCell(2);
-                    XSSFCell score = xssfRow.getCell(3);
-                    student.setNo(getValue(no));
-                    student.setName(getValue(name));
-                    student.setAge(getValue(age));
-                    student.setScore(Float.valueOf(getValue(score)));
-                    list.add(student);
+                    bean= new BrandArticleImportBean();
+                    XSSFCell errorCode = xssfRow.getCell(0);
+                    XSSFCell title = xssfRow.getCell(1);
+                    
+                    bean.setErrorCode(getValue(errorCode));
+                    bean.setTitle(getValue(title));
+                    
+                    list.add(bean);
                 }
             }
         }
@@ -103,12 +94,12 @@ public class ReadExcel {
      * @return
      * @throws IOException
      */
-    public List<Student> readXls(String path) throws IOException {
+    public List<BrandArticleImportBean> readXls(String path) throws IOException {
         System.out.println(ExcelCommon.PROCESSING + path);
         InputStream is = new FileInputStream(path);
         HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
-        Student student = null;
-        List<Student> list = new ArrayList<Student>();
+        BrandArticleImportBean bean = null;
+        List<BrandArticleImportBean> list = new ArrayList<BrandArticleImportBean>();
         // Read the Sheet
         for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
             HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
@@ -119,16 +110,14 @@ public class ReadExcel {
             for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
                 if (hssfRow != null) {
-                    student = new Student();
-                    HSSFCell no = hssfRow.getCell(0);
-                    HSSFCell name = hssfRow.getCell(1);
-                    HSSFCell age = hssfRow.getCell(2);
-                    HSSFCell score = hssfRow.getCell(3);
-                    student.setNo(getValue(no));
-                    student.setName(getValue(name));
-                    student.setAge(getValue(age));
-                    student.setScore(Float.valueOf(getValue(score)));
-                    list.add(student);
+                    bean= new BrandArticleImportBean();
+                    HSSFCell id = hssfRow.getCell(0);
+                    HSSFCell title = hssfRow.getCell(1);
+                    
+                    bean.setErrorCode(getValue(id));
+                    bean.setTitle(getValue(title));
+                    
+                    list.add(bean);
                 }
             }
         }
@@ -137,6 +126,9 @@ public class ReadExcel {
 
     @SuppressWarnings("static-access")
     private String getValue(XSSFCell xssfRow) {
+    	if(MatchUtil.isEmpty(xssfRow)) {
+    		return "" ;
+    	}
         if (xssfRow.getCellType() == xssfRow.CELL_TYPE_BOOLEAN) {
             return String.valueOf(xssfRow.getBooleanCellValue());
         } else if (xssfRow.getCellType() == xssfRow.CELL_TYPE_NUMERIC) {
@@ -148,6 +140,9 @@ public class ReadExcel {
 
     @SuppressWarnings("static-access")
     private String getValue(HSSFCell hssfCell) {
+    	if(MatchUtil.isEmpty(hssfCell)) {
+    		return "" ;
+    	}
         if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
             return String.valueOf(hssfCell.getBooleanCellValue());
         } else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {

@@ -27,17 +27,22 @@ import com.kuangkee.common.utils.excel.poi.vo.Student;
  * @author Hongten
  * @created 2014-5-21
  */
-public class ExcelTest {
+public class ExcelBrandTest {
 
     public static void main(String[] args) throws IOException {
         String excel2003_2007 = ExcelCommon.STUDENT_INFO_XLS_PATH;
         String excel2010 = ExcelCommon.STUDENT_INFO_XLSX_PATH;
-        String FILE_NAME1 = excel2003_2007 ;
-        String FILE_NAME2 = excel2010 ;
+        //卡特
+        String BRAND_PATH_PRE = "/cat" ;
+        String MID = "MID.xlsx";
+        String CID = "CID.xlsx";
+        String FMI = "FMI.xlsx";
         
-        String path1 = ExcelTest.class.getClassLoader().getResource(FILE_NAME1).getPath();
-        String path2 = ExcelTest.class.getClassLoader().getResource(FILE_NAME2).getPath();
+        String path1 = ExcelBrandTest.class.getClassLoader().getResource("").getPath();
+        String path2 = ExcelBrandTest.class.getClassLoader().getResource(excel2003_2007).getPath();
         System.out.println(path1);
+        System.out.println(path2);
+        System.exit(0);
         // read the 2003-2007 excel
         List<Student> list = new ReadExcel().readExcel(path1) ;
         if (list != null) {
@@ -47,7 +52,7 @@ public class ExcelTest {
         }
         System.out.println("======================================");
         // read the 2010 excel
-        List<Student> list1 = new ReadExcel().readExcel(path2);
+        List<Student> list1 = new ReadExcel().readExcel("");
         if (list1 != null) {
             for (Student student : list1) {
                 System.out.println("No. : " + student.getNo() + ", name : " + student.getName() + ", age : " + student.getAge() + ", score : " + student.getScore());
