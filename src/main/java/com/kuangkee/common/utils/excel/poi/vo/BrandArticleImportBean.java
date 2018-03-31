@@ -10,9 +10,14 @@ package com.kuangkee.common.utils.excel.poi.vo ;
 
 public class BrandArticleImportBean {
     /**
-     * error_code   错误编码
+     * error_code   错误编码,trim后的错误编码
      */
     private String errorCode ;
+    
+    /**
+     * errorCodeOriginal  原始的错误编码
+     */
+    private String errorCodeOriginal ;
     /**
      *  错误编码说明
      */
@@ -28,6 +33,14 @@ public class BrandArticleImportBean {
     private String brandId ;
     
     private String BrandName ;
+
+	public String getErrorCodeOriginal() {
+		return errorCodeOriginal;
+	}
+
+	public void setErrorCodeOriginal(String errorCodeOriginal) {
+		this.errorCodeOriginal = errorCodeOriginal;
+	}
 
 	public String getTitle() {
 		return title;

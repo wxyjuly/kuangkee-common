@@ -24,5 +24,21 @@ public class POICommon {
 	//分隔符
 	public static final String SEPARATOR = "@#@" ;
 	
+	/**
+	 * trimNotNoOrAlph: 替换掉除数字，字母以外的值. <br/>
+	 * @author Leon Xi
+	 * @param str
+	 * @return
+	 */
+	public static String trimNotNoOrAlph(String str) {
+		String pattern = "[^0-9a-zA-Z]+" ;  //只保留字母和数字的字符串
+		return str.replaceAll(pattern, "") ;
+	}
+	
+	public static void main(String[] args) {
+		String str1 = "ABCD@#$+---=-:EEE--==98082" ;
+		System.out.println(trimNotNoOrAlph(str1));
+	}
+	
 }
 

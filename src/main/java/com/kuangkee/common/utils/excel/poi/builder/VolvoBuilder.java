@@ -27,9 +27,9 @@ import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
  */
 public class VolvoBuilder {
 	
-	private static final String BRAND_ID = "10" ;  //品牌ID
+	public static final String BRAND_ID = "10" ;  //品牌ID
 	
-	private static final String BRAND_NAME = "沃尔沃" ; //品牌名称
+	public static final String BRAND_NAME = "沃尔沃" ; //品牌名称
 	
 	//卡特
 	private static final String PRE_BRAND_PATH = "brand/volvo/" ; //前置路径
@@ -37,12 +37,12 @@ public class VolvoBuilder {
 	private static final String SIDPID = "SIDPID.xls";  // 2nd part
 	private static final String FMI = "FMI.xls";  // 3rd part
 	
-	private static final int MAX_INIT_BEAN_SIZE = 200000 ; 
+	public static final int MAX_INIT_BEAN_SIZE = 200000 ; 
 	
 	//获取路径
-	private static final String MID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + MID ;
-	private static final String SIDPID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + SIDPID ;
-	private static final String FMI_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + FMI ;
+	public static final String MID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + MID ;
+	public static final String SIDPID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + SIDPID ;
+	public static final String FMI_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + FMI ;
 	
 	//通过导入Bean获取路径
 	public static List<BrandArticleImportBean> getImportBeanByPath(String path) throws IOException {
@@ -51,7 +51,7 @@ public class VolvoBuilder {
 		return beans ;
 	}
     
-	public static List<BrandArticleImportBean> buildCatBean() throws IOException {
+	public static List<BrandArticleImportBean> buildVolvoBean() throws IOException {
 		
 		int tmpMaxIdLen = 0 ;  //计算id最大长度
 		int tmpMaxContentLen = 0 ; //计算内容最大长度
@@ -140,7 +140,7 @@ System.out.println("tmpMaxIdLen:"+tmpMaxIdLen+";tmpMaxContentLen:"+tmpMaxContent
 	public static void main(String[] args) {
 		try {
 			long startTime = System.currentTimeMillis() ;
-			List<BrandArticleImportBean> results = buildCatBean() ;
+			List<BrandArticleImportBean> results = buildVolvoBean() ;
 			long end = System.currentTimeMillis() ;
 			System.err.println("->timelaspe:" + (end-startTime)/1000 + "s");
 		} catch (IOException e) {

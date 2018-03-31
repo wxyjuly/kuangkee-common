@@ -27,6 +27,33 @@ import com.kuangkee.common.utils.check.MatchUtil;
 import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
 
 public class ReadImportExcel {
+	
+	/**
+	 * readExcel:. <br/>
+	 * read the Excel file
+	 * @author Leon Xi
+	 * @param path
+	 * @param isTrimCode : false：不截取值；true:截取值
+	 * @return
+	 * @throws IOException
+	 */
+    public List<BrandArticleImportBean> readExcel(String path, boolean isTrimCode) throws IOException {
+        if (path == null || ExcelCommon.EMPTY.equals(path)) {
+            return null;
+        } else {
+            String postfix = Util.getPostfix(path);
+            if (!ExcelCommon.EMPTY.equals(postfix)) {
+                if (ExcelCommon.OFFICE_EXCEL_2003_POSTFIX.equals(postfix)) {
+                    return readXls(path);
+                } else if (ExcelCommon.OFFICE_EXCEL_2010_POSTFIX.equals(postfix)) {
+                    return readXlsx(path);
+                }
+            } else {
+                System.out.println(path + ExcelCommon.NOT_EXCEL_FILE);
+            }
+        }
+        return null;
+    }
     
     /**
      * read the Excel file
@@ -79,6 +106,7 @@ public class ReadImportExcel {
                     XSSFCell title = xssfRow.getCell(1);
                     
                     bean.setErrorCode(getValue(errorCode));
+                    bean.setErrorCodeOriginal(getValue(errorCode));
                     bean.setTitle(getValue(title));
                     
                     list.add(bean);
@@ -111,10 +139,11 @@ public class ReadImportExcel {
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
                 if (hssfRow != null) {
                     bean= new BrandArticleImportBean();
-                    HSSFCell id = hssfRow.getCell(0);
+                    HSSFCell errorCode = hssfRow.getCell(0);
                     HSSFCell title = hssfRow.getCell(1);
                     
-                    bean.setErrorCode(getValue(id));
+                    bean.setErrorCode(getValue(errorCode));
+                    bean.setErrorCodeOriginal(getValue(errorCode));
                     bean.setTitle(getValue(title));
                     
                     list.add(bean);
@@ -132,7 +161,7 @@ public class ReadImportExcel {
         if (xssfRow.getCellType() == xssfRow.CELL_TYPE_BOOLEAN) {
             return String.valueOf(xssfRow.getBooleanCellValue());
         } else if (xssfRow.getCellType() == xssfRow.CELL_TYPE_NUMERIC) {
-            return String.valueOf(xssfRow.getNumericCellValue());
+            return String.valueOf((int)xssfRow.getNumericCellValue());
         } else {
             return String.valueOf(xssfRow.getStringCellValue());
         }
@@ -146,7 +175,7 @@ public class ReadImportExcel {
         if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
             return String.valueOf(hssfCell.getBooleanCellValue());
         } else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
-            return String.valueOf(hssfCell.getNumericCellValue());
+            return String.valueOf((int)hssfCell.getNumericCellValue());
         } else {
             return String.valueOf(hssfCell.getStringCellValue());
         }
