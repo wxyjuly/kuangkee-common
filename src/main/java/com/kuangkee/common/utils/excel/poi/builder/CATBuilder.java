@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kuangkee.common.utils.check.MatchUtil;
 import com.kuangkee.common.utils.excel.poi.ReadImportExcel;
 import com.kuangkee.common.utils.excel.poi.common.POICommon;
 import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
@@ -27,9 +28,9 @@ import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
  */
 public class CATBuilder {
 	
-	private static final String BRAND_ID = "2" ;  //品牌ID
+	public static final String BRAND_ID = "2" ;  //品牌ID
 	
-	private static final String BRAND_NAME = "卡特" ; //品牌名称
+	public static final String BRAND_NAME = "卡特" ; //品牌名称
 	
 	//卡特
 	private static final String PRE_BRAND_PATH = "brand/cat/" ; //前置路径
@@ -38,11 +39,11 @@ public class CATBuilder {
 	private static final String FMI = "FMI.xlsx";  // 3rd part
 	
 	//获取路径
-	private static final String MID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + MID ;
-	private static final String CID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + CID ;
-	private static final String FMI_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + FMI ;
+	public static final String MID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + MID ;
+	public static final String CID_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + CID ;
+	public static final String FMI_EXCEL_PATH = POICommon.ROOT_PATH + PRE_BRAND_PATH + FMI ;
 	
-	private static final int MAX_INIT_BEAN_SIZE = 200000 ; 
+	public static final int MAX_INIT_BEAN_SIZE = 200000 ; 
 	
 	//通过导入Bean获取路径
 	public static List<BrandArticleImportBean> getImportBeanByPath(String path) throws IOException {
@@ -112,14 +113,33 @@ System.out.println("---循环次数["+loopCnt+"]-----clear:" + clearCnt +"--bean
 						}
 						buildBean = new BrandArticleImportBean() ;
 						
-						errorCode = midBean.getErrorCode() + POICommon.SEPARATOR + 
-								cidBean.getErrorCode() + POICommon.SEPARATOR 
-								+ fmiBean.getErrorCode() ;
+						String mid = midBean.getErrorCode() ;
+						String cid = cidBean.getErrorCode() ;
+						String fmi = fmiBean.getErrorCode() ;
+						if(MatchUtil.isEmpty(mid) 
+								|| MatchUtil.isEmpty(cid) 
+								|| MatchUtil.isEmpty(fmi)) { //跳过
+							continue ;
+						}
+						
+						errorCode = mid + POICommon.CAT_FISRT_SEPARATOR + 
+									cid + POICommon.CAT_SEC_SEPARATOR 
+									+ fmi ;
+						
+						buildBean.setErrorCodeOriginal(errorCode);
 						buildBean.setErrorCode(errorCode); //拼接Id
 						
-						title = midBean.getTitle() + POICommon.SEPARATOR + 
-								cidBean.getTitle() + POICommon.SEPARATOR
-								+ fmiBean.getTitle() ; //拼接错误编码
+						String midTitle = midBean.getTitle() ;
+						String cidTitle = cidBean.getTitle();
+						String fmiTitle = fmiBean.getTitle() ;
+						
+						if(MatchUtil.isEmpty(fmiTitle)) {
+							continue ;
+						}
+						
+						title = midTitle + POICommon.SEPARATOR + 
+								cidTitle + POICommon.SEPARATOR
+								+ fmiTitle ; //拼接错误编码
 						buildBean.setTitle(title);
 						
 						//count Max length

@@ -24,6 +24,10 @@ public class POICommon {
 	//分隔符
 	public static final String SEPARATOR = "@#@" ;
 	
+	//卡特编码
+	public static final String CAT_FISRT_SEPARATOR = ":" ;
+	public static final String CAT_SEC_SEPARATOR = "-" ;
+	
 	/**
 	 * trimNotNoOrAlph: 替换掉除数字，字母以外的值. <br/>
 	 * @author Leon Xi

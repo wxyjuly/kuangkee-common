@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kuangkee.common.utils.check.MatchUtil;
 import com.kuangkee.common.utils.excel.poi.ReadImportExcel;
 import com.kuangkee.common.utils.excel.poi.common.POICommon;
 import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
@@ -47,7 +48,6 @@ public class VolvoBuilder {
 	//通过导入Bean获取路径
 	public static List<BrandArticleImportBean> getImportBeanByPath(String path) throws IOException {
 		List<BrandArticleImportBean> beans = new ReadImportExcel().readExcel(path) ;
-//		System.out.println(beans);
 		return beans ;
 	}
     
@@ -69,8 +69,8 @@ System.err.println("MIDBeans->" + MIDBeans.size());
 System.err.println("SIDPIDBeans->" + SIDPIDBeans.size());
 System.err.println("FMIBeans->" + FMIBeans.size());
 System.out.println("FMIBeans count->"+ MIDBeans.size() * FMIBeans.size() * SIDPIDBeans.size() );
+		
 		int excelPlusCnt = MIDBeans.size() * FMIBeans.size() * SIDPIDBeans.size() ;
-//		System.exit(0);
 		BrandArticleImportBean buildBean = null ;
 		// 循环遍历生成数据
 		String errorCode = null ;
@@ -107,15 +107,35 @@ System.out.println("---循环次数["+loopCnt+"]-----clear:" + clearCnt +"--bean
 						}
 						buildBean = new BrandArticleImportBean() ;
 						
-						errorCode = midBean.getErrorCode() + POICommon.SEPARATOR + 
-								cidBean.getErrorCode() + POICommon.SEPARATOR 
-								+ fmiBean.getErrorCode() ;
-						buildBean.setErrorCode(errorCode);; //拼接Id
+						String mid = midBean.getErrorCode() ;
+						String cid = cidBean.getErrorCode() ;
+						String fmi = fmiBean.getErrorCode() ;
+						if(MatchUtil.isEmpty(mid) 
+								|| MatchUtil.isEmpty(cid) 
+								|| MatchUtil.isEmpty(fmi)) { //跳过
+							continue ;
+						}
 						
-						title = midBean.getTitle() + POICommon.SEPARATOR + 
-								cidBean.getTitle() + POICommon.SEPARATOR
-								+ fmiBean.getTitle() ; //拼接原因
+						errorCode = mid + POICommon.CAT_FISRT_SEPARATOR + 
+									cid + POICommon.CAT_SEC_SEPARATOR 
+									+ fmi ;
+						
+						buildBean.setErrorCodeOriginal(errorCode);
+						buildBean.setErrorCode(errorCode); //拼接Id
+						
+						String midTitle = midBean.getTitle() ;
+						String cidTitle = cidBean.getTitle();
+						String fmiTitle = fmiBean.getTitle() ;
+						
+						if(MatchUtil.isEmpty(fmiTitle)) {
+							continue ;
+						}
+						
+						title = midTitle + POICommon.SEPARATOR + 
+								cidTitle + POICommon.SEPARATOR
+								+ fmiTitle ; //拼接错误编码
 						buildBean.setTitle(title);
+						
 						
 						//count Max length
 						if(tmpMaxIdLen < errorCode.length()) {
