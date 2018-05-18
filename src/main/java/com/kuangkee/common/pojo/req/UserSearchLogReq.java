@@ -5,6 +5,8 @@ import java.util.Date;
 public class UserSearchLogReq {
 	
     private Integer logId;
+    
+    private String from ; //与merchant_id对应，商户ID
 
     private Integer userId;
 
@@ -46,6 +48,14 @@ public class UserSearchLogReq {
 
 	public String getArticleId() {
 		return articleId;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
 	}
 
 	public void setArticleId(String articleId) {
