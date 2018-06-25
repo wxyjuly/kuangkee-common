@@ -32,6 +32,7 @@ public class Constants {
 
 	public static final class SysConstant {
 		public static final String ACOUNT = "account" ; //session中的user值
-		
 	}
+	
+	
 }

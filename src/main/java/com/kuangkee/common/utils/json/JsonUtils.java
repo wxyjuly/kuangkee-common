@@ -2,6 +2,7 @@ package com.kuangkee.common.utils.json ;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,4 +69,8 @@ public class JsonUtils {
     	return null;
     }
     
+    
+    public static String listToString(List list) {
+    	return JSON.toJSONString(list, true); 
+    }
 }
