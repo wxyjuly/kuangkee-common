@@ -12,8 +12,6 @@ package com.kuangkee.common.utils.excel.poi.builder;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
-
 import com.kuangkee.common.utils.excel.poi.ReadImportExcel;
 import com.kuangkee.common.utils.excel.poi.common.POICommon;
 import com.kuangkee.common.utils.excel.poi.vo.BrandArticleImportBean;
@@ -92,7 +90,7 @@ public class OneBrandBuilder {
 		return beans ;
 	}
 	
-	@Test
+//	@Test
 	public void testBrandXiaoSong() throws IOException {
 		List<BrandArticleImportBean> results = getImportBeanByPath(BRAND_XIAOSONG_FILE_PATH) ;
 		System.out.println(results);

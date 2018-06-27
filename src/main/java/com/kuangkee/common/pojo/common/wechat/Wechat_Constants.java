@@ -11,6 +11,8 @@ package com.kuangkee.common.pojo.common.wechat;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.ObjectUtils.Null;
+
 import com.jcraft.jsch.UserInfo;
 import com.kuangkee.common.pojo.req.UserSearchLogReq;
 import com.kuangkee.common.utils.check.MatchUtil;
@@ -60,8 +62,6 @@ public class Wechat_Constants {
 	
 	public static final String WECHAT_USERINFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?" ; //access_token=Xxx&openid=oAmV1tw7iUbDt0px_z0NBLy164Dg:"
 	
-	
-	
 	public static final String WECHAT_BATCH_OPENIDS_URL = "https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=" ; //step02:${token}
 	
 	//用户相关前缀
@@ -72,21 +72,7 @@ public class Wechat_Constants {
 	
 	public static final String INDEX_PAGE = "index.html" ;
 	
-	public static UserInfo getAccount(HttpServletRequest request, UserSearchLogReq searchReq,
-			long uId) {
-		UserInfo userInfo = null ;
-		
-		Object userInfoSession = SessionUtils.getSessionValue(request, Constants.SysConstant.ACOUNT + "_"+  String.valueOf(uId)) ;
-		
-		if(MatchUtil.isEmpty(userInfoSession)) { //session无值，从数据库获取，并放入session
-			
-			SessionUtils.setSessionValue(request, Constants.SysConstant.ACOUNT + "_"+  String.valueOf(uId), userInfo);
-			
-		} else { //session有值，直接转换
-		}
-		return null ;
-	}
-	
+
 	/**
 	 * 
 	 * getAccessToken:获取token. <br/>

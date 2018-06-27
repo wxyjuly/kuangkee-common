@@ -239,6 +239,15 @@ public class WechatUserInfo {
 		this.qrSceneStr = qrSceneStr;
 	}
 
+	@Override
+	public String toString() {
+		return "WechatUserInfo [subscribe=" + subscribe + ", openId=" + openId + ", nickName=" + nickName + ", sex="
+				+ sex + ", language=" + language + ", city=" + city + ", province=" + province + ", country=" + country
+				+ ", headImgUrl=" + headImgUrl + ", subscribeTime=" + subscribeTime + ", remark=" + remark
+				+ ", groupId=" + groupId + ", tagIdList=" + tagIdList + ", subscribeScene=" + subscribeScene
+				+ ", qrScene=" + qrScene + ", qrSceneStr=" + qrSceneStr + "]";
+	}
+
 
 
 	public static void main(String[] args) {
